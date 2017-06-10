@@ -7,3 +7,37 @@
 
 warns if wrapped function is not memoized
 
+## Usage
+
+```
+npm install --save warn-if-not-memoized
+```
+```js
+var warnIfNotMemoized = require('warn-if-not-memoized')
+```
+
+## `warnIfNotMemoized(fn, options)`
+
+Returns a wrapper for `fn` that will log a warning if successive calls to `fn` return values that are `!==` but are
+deeply equal according to `options.isEqual` (which defaults to `lodash.isequal`).
+
+The wrapper will return its previous return value if it is deeply equal to the next value `fn` returns.
+
+### `options`
+* `isEqual` (`(a: any, b: any) => boolean`): returns `true` if `a` and `b` are deeply equal (default: `lodash.isequal`)
+* `logError` (`(message: string) => any`): logs the warning message (default: `console.error`)
+* `functionName` (`string`): the name of the function to use in the warning message
+* `createWarningMessage` (`(info: {functionName: ?string, arguments: Array<any>, returnValue: any, prevReturnValue: any}) => string`):
+  creates a warning message when `fn` is determined to be not memoized.
+
+### `warnIfNotMemoized.bypass` (`boolean`)
+
+Set `warnIfNotMemoized.bypass = true` in production to make `warnIfNotMemoized` return `fn` without wrapping it.
+
+### `warnIfNotMemoized.defaultOptions`
+
+These are the global defaults for `options`.  The actual values `warnIfNotMemoized` uses are:
+```js
+require('lodash.defaults')({}, options, warnIfNotMemoized.defaultOptions)
+```
+

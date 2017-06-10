@@ -1,3 +1,20 @@
 // @flow
 
-declare module.exports: {};
+type Options = {
+  isEqual?: (a: any, b: any) => boolean,
+  logError?: (message: string) => any,
+  functionName?: string,
+  createWarningMessage?: (info: {
+    functionName: ?string,
+    arguments: Array<any>,
+    returnValue: any,
+    prevReturnValue: any,
+  }) => string,
+}
+
+declare type warnIfNotMemoized = {
+  <T>(fn: T, options: Options): T,
+  bypass: boolean,
+  defaultOptions: Options,
+}
+declare module.exports: warnIfNotMemoized;

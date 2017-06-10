@@ -58,8 +58,14 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nyc": "^10.2.0",
+    "reselect": "^3.0.1",
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6",
+    "sinon": "^2.3.4",
     "validate-commit-msg": "^2.11.2"
+  },
+  "dependencies": {
+    "lodash.defaults": "^4.2.0",
+    "lodash.isequal": "^4.5.0"
   }
 }
